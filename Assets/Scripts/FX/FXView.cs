@@ -29,7 +29,9 @@ namespace TestDemo
 
         public void Appear()
         {
+            _particleSystem.Clear();
             _particleSystem.Play();
+
             _isRun = true;
         }
 

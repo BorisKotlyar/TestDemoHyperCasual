@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -31,8 +32,6 @@ namespace TestDemo
             {
                 var crystall = _factory.Create();
                 crystall.Position = obj.Position;
-
-                _signalBus.Fire(new CrystallAppearSignal() {Position = crystall.Position});
             }
         }
 

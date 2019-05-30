@@ -95,10 +95,11 @@ namespace TestDemo
             if (_spawnedCount < _settings.MinCountOnScreen)
             {
                 _spawnedCount++;
-                _lastSpawnPoint = SpawnPlatform(_lastSpawnPoint, true);
 
-                var pos = _lastSpawnPoint;
+                var pos = SpawnPlatform(_lastSpawnPoint, true);
+
                 _signalBus.Fire(new PlatformAppearSignal() { Position = pos });
+                _lastSpawnPoint = pos;
 
                 SuperInvoke.Run(CheckSpawn, _settings.DelayTime, _siTag);
             }

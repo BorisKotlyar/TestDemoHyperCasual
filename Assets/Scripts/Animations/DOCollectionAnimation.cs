@@ -17,8 +17,6 @@ namespace TestDemo.Animations
         [SerializeField] protected bool _overrideSettings;
         #endregion
 
-        private int _compliteAnimationCounter;
-        private UnityAction _cachedAcion;
 
         #region Public Methods
         /// <summary>
@@ -30,10 +28,8 @@ namespace TestDemo.Animations
             base.Play(onEndPlay);
 
             Stop();
-            _cachedAcion = onEndPlay;
 
-            _compliteAnimationCounter = 0;
-
+            var setted = false;
             foreach (var doAnimation in _content)
             {
                 if (_played)
@@ -42,7 +38,8 @@ namespace TestDemo.Animations
                 if (_overrideSettings)
                     doAnimation.SetSettings(_settings);
 
-                doAnimation.Play(OnEndPlay);
+                doAnimation.Play(setted ? null : onEndPlay);
+                setted = true;
             }
             
             _played = true;
@@ -57,10 +54,8 @@ namespace TestDemo.Animations
             base.Rewind(onEndPlay);
 
             Stop();
-            _cachedAcion = onEndPlay;
 
-            _compliteAnimationCounter = 0;
-
+            var setted = false;
             foreach (var doAnimation in _content)
             {
                 if (_played)
@@ -69,7 +64,7 @@ namespace TestDemo.Animations
                 if (_overrideSettings)
                     doAnimation.SetSettings(_settings);
 
-                doAnimation.Rewind(OnEndPlay);
+                doAnimation.Rewind(setted ? null : onEndPlay);
             }
 
             _played = true;
@@ -92,23 +87,5 @@ namespace TestDemo.Animations
             _played = false;
         }
         #endregion
-
-        private void OnEndPlay()
-        {
-            if (_compliteAnimationCounter < 0)
-                return;
-
-            _compliteAnimationCounter++;
-            CheckComplition();
-        }
-
-        private void CheckComplition()
-        {
-            if (_compliteAnimationCounter == _content.Length)
-            {
-                _compliteAnimationCounter = -1;
-                _cachedAcion?.Invoke();
-            }
-        }
     }
 }

@@ -18,7 +18,6 @@ namespace TestDemo
         #region IPoolable Implementation
         public void OnDespawned()
         {
-            //_registry.RemoveEnemy(this);
             _pool = null;
         }
 
@@ -38,7 +37,10 @@ namespace TestDemo
 
         public void Die()
         {
-            _view.Disappear(Dispose);
+            _view.Disappear(()=>
+            {
+                Dispose();
+            });
         }
 
         [Inject]

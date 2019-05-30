@@ -53,6 +53,6 @@ MonoBehaviour:
     PlayerFallHandler:
       MinFallVelocity: 1
   GameSettings:
-    ScoreMultCounter: 10
+    ScoreMultCounter: 1
   CrystallSpawnSettings:
     Chance: 40

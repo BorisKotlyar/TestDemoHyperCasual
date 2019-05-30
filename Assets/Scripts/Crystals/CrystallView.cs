@@ -48,6 +48,8 @@ namespace TestDemo
             if (view != null)
             {
                 _signalBus.Fire<CrystallCollectSignal>();
+                _signalBus.Fire(new CrystallAppearSignal() { Position = _cachedTransform.position });
+
                 Data.Die();
             }
         }
